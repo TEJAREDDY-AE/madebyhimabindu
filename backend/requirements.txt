@@ -1,0 +1,16 @@
+# Runtime dependencies
+fastapi
+uvicorn[standard]
+pydantic>=2
+pydantic-settings
+python-dotenv
+pyverilog
+langchain
+langchain-groq
+groq
+
+# Dev / test dependencies
+pytest
+pytest-asyncio
+httpx
+hypothesis
