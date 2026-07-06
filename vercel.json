@@ -1,33 +1,10 @@
 {
-  "builds": [
+  "outputDirectory": "frontend/dist",
+  "cleanUrls": true,
+  "rewrites": [
     {
-      "src": "frontend/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/assets/(.*)",
-      "dest": "/frontend/dist/assets/$1"
-    },
-    {
-      "src": "/bg_(.*).png",
-      "dest": "/frontend/dist/bg_$1.png"
-    },
-    {
-      "src": "/cyber_backdrop.png",
-      "dest": "/frontend/dist/cyber_backdrop.png"
-    },
-    {
-      "src": "/hero-banner.png",
-      "dest": "/frontend/dist/hero-banner.png"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/frontend/dist/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
