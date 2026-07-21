@@ -1,9 +1,9 @@
 {
-  "outputDirectory": "frontend/dist",
+  "outputDirectory": "portfolio",
   "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/((?!assets/|.*\\.(?:png|jpg|jpeg|gif|svg|ico|css|js)$).*)",
+      "source": "/((?!assets/|.*\\.(?:png|jpg|jpeg|gif|svg|ico|css|js|pdf)$).*)",
       "destination": "/index.html"
     }
   ]
