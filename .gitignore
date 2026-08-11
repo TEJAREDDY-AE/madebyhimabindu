@@ -30,3 +30,6 @@ Thumbs.db
 # Unrelated directories
 real-estate/
 ecodrix-architecture/
+portfolio/
+.kiro/
+.vscode/
