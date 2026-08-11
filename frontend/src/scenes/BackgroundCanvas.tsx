@@ -39,7 +39,7 @@ function ParticleGrid({ theme = 'dark' }: BackgroundCanvasProps) {
           size={0.045}
           sizeAttenuation={true}
           depthWrite={false}
-          opacity={theme === 'dark' ? 0.4 : 0.6}
+          opacity={theme === 'dark' ? 0.35 : 0.5}
         />
       </Points>
     </group>
@@ -61,11 +61,11 @@ function AmbientTraces({ theme = 'dark' }: BackgroundCanvasProps) {
     <group ref={lineRef}>
       <mesh rotation={[Math.PI / 2, 0, 0]}>
         <ringGeometry args={[6, 6.02, 64]} />
-        <meshBasicMaterial color={traceColor} transparent opacity={theme === 'dark' ? 0.15 : 0.25} side={THREE.DoubleSide} />
+        <meshBasicMaterial color={traceColor} transparent opacity={theme === 'dark' ? 0.12 : 0.2} side={THREE.DoubleSide} />
       </mesh>
       <mesh rotation={[Math.PI / 2, 0, 0]}>
         <ringGeometry args={[10, 10.02, 64]} />
-        <meshBasicMaterial color={traceColor} transparent opacity={theme === 'dark' ? 0.1 : 0.18} side={THREE.DoubleSide} />
+        <meshBasicMaterial color={traceColor} transparent opacity={theme === 'dark' ? 0.08 : 0.15} side={THREE.DoubleSide} />
       </mesh>
     </group>
   );
@@ -73,6 +73,7 @@ function AmbientTraces({ theme = 'dark' }: BackgroundCanvasProps) {
 
 export const BackgroundCanvas: React.FC<BackgroundCanvasProps> = ({ theme = 'dark' }) => {
   const bgColor = theme === 'dark' ? '#050B0D' : '#EEF3F0';
+  const strokeColor = theme === 'dark' ? '#00E676' : '#00B853';
 
   return (
     <div className="fixed inset-0 z-0 pointer-events-none transition-colors duration-500">
@@ -86,14 +87,30 @@ export const BackgroundCanvas: React.FC<BackgroundCanvasProps> = ({ theme = 'dar
         <AmbientTraces theme={theme} />
       </Canvas>
 
+      {/* Transparent PCB Circuit Pattern Overlay (Non-Disruptive background) */}
+      <div className="absolute inset-0 opacity-[0.07] pointer-events-none flex items-center justify-center overflow-hidden">
+        <svg className="w-full h-full text-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" fill="none" stroke={strokeColor}>
+          <path d="M100 100 h200 l100 100 v300 l-100 100 h-200" strokeWidth="2" strokeDasharray="6,6" />
+          <path d="M800 100 h-200 l-100 100 v300 l100 100 h200" strokeWidth="2" strokeDasharray="6,6" />
+          <circle cx="300" cy="100" r="8" fill={strokeColor} />
+          <circle cx="700" cy="100" r="8" fill={strokeColor} />
+          <circle cx="400" cy="200" r="6" fill={strokeColor} />
+          <circle cx="600" cy="200" r="6" fill={strokeColor} />
+          <path d="M500 50 v900 M50 500 h900" strokeWidth="1.5" strokeOpacity="0.4" />
+          <rect x="350" y="350" width="300" height="300" rx="20" strokeWidth="2" />
+          <circle cx="500" cy="500" r="80" strokeWidth="1.5" strokeDasharray="4,4" />
+        </svg>
+      </div>
+
       {/* Grid Pattern Overlay */}
       <div
-        className="absolute inset-0 opacity-[0.05] pointer-events-none"
+        className="absolute inset-0 opacity-[0.04] pointer-events-none"
         style={{
-          backgroundImage: `radial-gradient(${theme === 'dark' ? '#00E676' : '#00B853'} 1px, transparent 1px)`,
+          backgroundImage: `radial-gradient(${strokeColor} 1px, transparent 1px)`,
           backgroundSize: '24px 24px',
         }}
       />
     </div>
   );
 };
+
