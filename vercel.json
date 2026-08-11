@@ -1,9 +1,10 @@
 {
-  "outputDirectory": "portfolio",
-  "cleanUrls": true,
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/dist",
+  "framework": "vite",
   "rewrites": [
     {
-      "source": "/((?!assets/|.*\\.(?:png|jpg|jpeg|gif|svg|ico|css|js|pdf)$).*)",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
