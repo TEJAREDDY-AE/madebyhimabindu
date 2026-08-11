@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
-import { HeroPCBScene } from '../scenes/HeroPCBScene';
-import { ArrowDown, Cpu, Sparkles, Layers } from 'lucide-react';
+import React from 'react';
+import { ArrowDown, Cpu, Layers, Image as ImageIcon } from 'lucide-react';
 
 interface Slide01Props {
   onNext?: () => void;
 }
 
 export const Slide01: React.FC<Slide01Props> = ({ onNext }) => {
-  const [hoveredComponent, setHoveredComponent] = useState<string | null>(null);
-
   return (
     <div className="w-full h-full flex flex-col lg:flex-row items-center justify-between px-6 lg:px-16 pt-20 pb-12 relative z-10 select-none">
       {/* Left Column: Slide Title & Student Details */}
@@ -28,7 +25,7 @@ export const Slide01: React.FC<Slide01Props> = ({ onNext }) => {
         </h2>
 
         <p className="text-sm sm:text-base text-[#B7C2C5] max-w-xl font-normal leading-relaxed mb-8">
-          An interactive, cinematic 3D digital presentation exploring modern surface-mount technology (SMT), thermodynamics, through-hole wave soldering, and automated optical/X-ray quality control.
+          A comprehensive digital slide presentation exploring modern surface-mount technology (SMT), thermodynamics, through-hole wave soldering, and automated optical/X-ray quality control.
         </p>
 
         {/* STUDENT DETAILS BOX (Slide 1 ONLY) */}
@@ -58,7 +55,7 @@ export const Slide01: React.FC<Slide01Props> = ({ onNext }) => {
         {onNext && (
           <button
             onClick={onNext}
-            className="mt-8 inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-gradient-to-r from-[#00D66B] to-[#00E676] text-black font-mono font-bold text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(0,230,118,0.4)] hover:scale-105 active:scale-95 transition-all w-fit"
+            className="mt-8 inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-gradient-to-r from-[#00D66B] to-[#00E676] text-black font-mono font-bold text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(0,230,118,0.4)] hover:scale-105 active:scale-95 transition-all w-fit cursor-pointer"
           >
             <span>EXPLORE ASSEMBLY LINE</span>
             <ArrowDown className="w-4 h-4 animate-bounce" />
@@ -66,17 +63,28 @@ export const Slide01: React.FC<Slide01Props> = ({ onNext }) => {
         )}
       </div>
 
-      {/* Right Column: Interactive 3D Hero PCB Model */}
-      <div className="flex-1 w-full h-[55vh] lg:h-[75vh] relative z-10 flex items-center justify-center">
-        <HeroPCBScene onComponentHover={setHoveredComponent} />
-
-        {/* Hover telemetry tooltip */}
-        {hoveredComponent && (
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 pcb-glass px-4 py-2 rounded-xl border border-[#00E676] text-xs font-mono text-[#19FF88] box-glow-green pointer-events-none">
-            INSPECTING: {hoveredComponent}
+      {/* Right Column: Presentation Image Showcase */}
+      <div className="flex-1 w-full h-[50vh] lg:h-[70vh] relative z-10 flex items-center justify-center p-4">
+        <div className="relative w-full max-w-xl h-full rounded-2xl overflow-hidden border border-[#00E676]/40 pcb-glass shadow-2xl group transition-all duration-500 hover:border-[#00E676]">
+          <img
+            src="/images/slide01_hero.png"
+            alt="PCB Assembly Line Overview"
+            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050B0D] via-transparent to-transparent opacity-80" />
+          
+          <div className="absolute top-4 left-4 pcb-glass px-3 py-1.5 rounded-lg border border-[#00E676]/30 text-[10px] font-mono text-[#00E676] flex items-center gap-2">
+            <ImageIcon className="w-3.5 h-3.5" />
+            <span>IMAGE EXHIBIT 01: SMT LINE OVERVIEW</span>
           </div>
-        )}
+
+          <div className="absolute bottom-4 left-4 right-4 pcb-glass p-3 rounded-xl border border-[#00E676]/30 backdrop-blur-md">
+            <div className="text-xs font-mono font-bold text-white mb-1">AUTOMATED LINE 04</div>
+            <div className="text-[11px] font-mono text-[#00E676]">Inline SMT Convection & Robotic Placement Station</div>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
+

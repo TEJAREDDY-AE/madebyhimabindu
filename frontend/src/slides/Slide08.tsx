@@ -1,6 +1,5 @@
 import React from 'react';
-import { AOIScene } from '../scenes/AOIScene';
-import { Search, ShieldCheck, CheckCircle, Scan } from 'lucide-react';
+import { Scan, CheckCircle, Image as ImageIcon } from 'lucide-react';
 import { SLIDES } from '../data/slidesData';
 
 export const Slide08: React.FC = () => {
@@ -47,10 +46,28 @@ export const Slide08: React.FC = () => {
         </div>
       </div>
 
-      {/* Right Column: 3D AOI Machine Interactive Scene */}
-      <div className="flex-1 w-full h-[50vh] lg:h-[70vh] relative z-10 flex items-center justify-center">
-        <AOIScene />
+      {/* Right Column: Image Viewer */}
+      <div className="flex-1 w-full h-[50vh] lg:h-[70vh] relative z-10 flex items-center justify-center p-4">
+        <div className="relative w-full max-w-xl h-full rounded-2xl overflow-hidden border border-[#00E676]/40 pcb-glass shadow-2xl group transition-all duration-500 hover:border-[#00E676]">
+          <img
+            src="/images/slide08_aoi_inspection.png"
+            alt="Automated Optical Inspection (AOI)"
+            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050B0D] via-transparent to-transparent opacity-80" />
+          
+          <div className="absolute top-4 left-4 pcb-glass px-3 py-1.5 rounded-lg border border-[#00E676]/30 text-[10px] font-mono text-[#00E676] flex items-center gap-2">
+            <ImageIcon className="w-3.5 h-3.5" />
+            <span>IMAGE EXHIBIT 08: AUTOMATED OPTICAL INSPECTION</span>
+          </div>
+
+          <div className="absolute bottom-4 left-4 right-4 pcb-glass p-3 rounded-xl border border-[#00E676]/30 backdrop-blur-md">
+            <div className="text-xs font-mono font-bold text-white mb-1">MULTI-ANGLE RGB LED RING OPTICS</div>
+            <div className="text-[11px] font-mono text-[#00E676]">10-15µm High-Speed Vision Sensor Scanning 100% Solder Joints</div>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
+

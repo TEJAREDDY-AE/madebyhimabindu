@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { HeroPCBScene } from '../scenes/HeroPCBScene';
-import { Cpu, Zap, Layers, CheckCircle2 } from 'lucide-react';
+import { Layers, Image as ImageIcon } from 'lucide-react';
 import { SLIDES } from '../data/slidesData';
 
 export const Slide02: React.FC = () => {
@@ -27,7 +26,7 @@ export const Slide02: React.FC = () => {
           {slideData.description}
         </p>
 
-        {/* 3 Interactive Technology Cards */}
+        {/* 3 Technology Cards */}
         <div className="space-y-3 mb-6">
           <div
             onMouseEnter={() => setActiveHighlight('SMT')}
@@ -79,10 +78,28 @@ export const Slide02: React.FC = () => {
         </div>
       </div>
 
-      {/* Right Column: 3D PCB Interactive Viewer */}
-      <div className="flex-1 w-full h-[50vh] lg:h-[70vh] relative z-10 flex items-center justify-center">
-        <HeroPCBScene activeHighlight={activeHighlight} />
+      {/* Right Column: Image Viewer */}
+      <div className="flex-1 w-full h-[50vh] lg:h-[70vh] relative z-10 flex items-center justify-center p-4">
+        <div className="relative w-full max-w-xl h-full rounded-2xl overflow-hidden border border-[#00E676]/40 pcb-glass shadow-2xl group transition-all duration-500 hover:border-[#00E676]">
+          <img
+            src="/images/slide02_smt_tht.png"
+            alt="SMT vs THT PCB Comparison"
+            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050B0D] via-transparent to-transparent opacity-80" />
+          
+          <div className="absolute top-4 left-4 pcb-glass px-3 py-1.5 rounded-lg border border-[#00E676]/30 text-[10px] font-mono text-[#00E676] flex items-center gap-2">
+            <ImageIcon className="w-3.5 h-3.5" />
+            <span>IMAGE EXHIBIT 02: SMT vs THT COMPONENT COMPARISON</span>
+          </div>
+
+          <div className="absolute bottom-4 left-4 right-4 pcb-glass p-3 rounded-xl border border-[#00E676]/30 backdrop-blur-md">
+            <div className="text-xs font-mono font-bold text-white mb-1">SURFACE MOUNT VS THROUGH-HOLE</div>
+            <div className="text-[11px] font-mono text-[#00E676]">Micro-BGA SMT ICs (Left) & THT DIP/Capacitor Terminals (Right)</div>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
+

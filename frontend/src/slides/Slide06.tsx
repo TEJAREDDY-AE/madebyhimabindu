@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { ReflowOvenScene } from '../scenes/ReflowOvenScene';
-import { Flame, Thermometer, Activity } from 'lucide-react';
+import { Flame, Thermometer, Image as ImageIcon } from 'lucide-react';
 import { SLIDES } from '../data/slidesData';
 
 export const Slide06: React.FC = () => {
@@ -116,9 +115,26 @@ export const Slide06: React.FC = () => {
         </div>
       </div>
 
-      {/* Right Column: 3D Reflow Oven Interactive Chamber Scene */}
-      <div className="flex-1 w-full h-[48vh] lg:h-[70vh] relative z-10 flex items-center justify-center">
-        <ReflowOvenScene />
+      {/* Right Column: Image Viewer */}
+      <div className="flex-1 w-full h-[48vh] lg:h-[70vh] relative z-10 flex items-center justify-center p-4">
+        <div className="relative w-full max-w-xl h-full rounded-2xl overflow-hidden border border-red-500/40 pcb-glass shadow-2xl group transition-all duration-500 hover:border-red-500">
+          <img
+            src="/images/slide06_reflow_oven.png"
+            alt="Multi-Zone Reflow Oven"
+            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050B0D] via-transparent to-transparent opacity-80" />
+          
+          <div className="absolute top-4 left-4 pcb-glass px-3 py-1.5 rounded-lg border border-red-500/30 text-[10px] font-mono text-red-400 flex items-center gap-2">
+            <ImageIcon className="w-3.5 h-3.5" />
+            <span>IMAGE EXHIBIT 06: CONVECTION REFLOW OVEN</span>
+          </div>
+
+          <div className="absolute bottom-4 left-4 right-4 pcb-glass p-3 rounded-xl border border-red-500/30 backdrop-blur-md">
+            <div className="text-xs font-mono font-bold text-white mb-1">10-ZONE FORCED CONVECTION OVEN</div>
+            <div className="text-[11px] font-mono text-red-400">Peak Thermal Reflow Zone (245°C Liquidus Bonding)</div>
+          </div>
+        </div>
       </div>
     </div>
   );

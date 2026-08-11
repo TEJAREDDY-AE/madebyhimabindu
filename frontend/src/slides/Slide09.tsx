@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { QualityControlScene } from '../scenes/QualityControlScene';
-import { Eye, ShieldCheck, Zap, CheckCircle2 } from 'lucide-react';
+import { Eye, ShieldCheck, Zap, CheckCircle2, Image as ImageIcon } from 'lucide-react';
 import { SLIDES } from '../data/slidesData';
 
 export const Slide09: React.FC = () => {
@@ -114,10 +113,28 @@ export const Slide09: React.FC = () => {
         </div>
       </div>
 
-      {/* Right Column: 3D Quality Control Scene */}
-      <div className="flex-1 w-full h-[50vh] lg:h-[70vh] relative z-10 flex items-center justify-center">
-        <QualityControlScene activeTab={activeTab} />
+      {/* Right Column: Image Viewer */}
+      <div className="flex-1 w-full h-[50vh] lg:h-[70vh] relative z-10 flex items-center justify-center p-4">
+        <div className="relative w-full max-w-xl h-full rounded-2xl overflow-hidden border border-[#00E676]/40 pcb-glass shadow-2xl group transition-all duration-500 hover:border-[#00E676]">
+          <img
+            src="/images/slide09_axi_xray.png"
+            alt="AXI X-Ray Inspection and BGA Analysis"
+            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050B0D] via-transparent to-transparent opacity-80" />
+          
+          <div className="absolute top-4 left-4 pcb-glass px-3 py-1.5 rounded-lg border border-[#00E676]/30 text-[10px] font-mono text-[#00E676] flex items-center gap-2">
+            <ImageIcon className="w-3.5 h-3.5" />
+            <span>IMAGE EXHIBIT 09: AXI X-RAY VOID ANALYSIS & FCT PROBES</span>
+          </div>
+
+          <div className="absolute bottom-4 left-4 right-4 pcb-glass p-3 rounded-xl border border-[#00E676]/30 backdrop-blur-md">
+            <div className="text-xs font-mono font-bold text-white mb-1">AXI TRANSMISSIVE TOMOGRAPHY MONITOR</div>
+            <div className="text-[11px] font-mono text-[#00E676]">0.4mm BGA Solder Ball Array Inspection (&lt;5% Voiding PASS)</div>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
+

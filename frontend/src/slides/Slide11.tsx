@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShieldAlert, CheckCircle2, AlertTriangle, Cpu, Wrench } from 'lucide-react';
+import { ShieldAlert, AlertTriangle, Wrench, Image as ImageIcon } from 'lucide-react';
 import { SLIDES } from '../data/slidesData';
 
 export const Slide11: React.FC = () => {
@@ -38,9 +38,10 @@ export const Slide11: React.FC = () => {
   ];
 
   return (
-    <div className="w-full h-full flex flex-col justify-center px-6 lg:px-16 pt-20 pb-12 relative z-10 select-none">
-      <div className="max-w-3xl mb-6">
-        <div className="inline-flex items-center gap-2 pcb-glass px-3 py-1 rounded-full border border-amber-500/40 text-[10px] font-mono text-amber-400 tracking-wider uppercase mb-3">
+    <div className="w-full h-full flex flex-col lg:flex-row items-center justify-between px-6 lg:px-16 pt-20 pb-12 relative z-10 select-none">
+      {/* Left Column: Defect Cards & Analysis */}
+      <div className="flex-1 max-w-xl z-20 flex flex-col justify-center">
+        <div className="inline-flex items-center gap-2 pcb-glass px-3 py-1 rounded-full border border-amber-500/40 text-[10px] font-mono text-amber-400 tracking-wider uppercase mb-3 w-fit">
           <ShieldAlert className="w-3.5 h-3.5 text-amber-400" />
           <span>{slideData.stageTag}</span>
         </div>
@@ -51,61 +52,79 @@ export const Slide11: React.FC = () => {
         <h3 className="text-base font-mono font-semibold text-[#00E676] mb-3">
           {slideData.subtitle}
         </h3>
-        <p className="text-xs sm:text-sm text-[#B7C2C5] leading-relaxed">
+        <p className="text-xs sm:text-sm text-[#B7C2C5] leading-relaxed mb-4">
           {slideData.description}
         </p>
-      </div>
 
-      {/* Defect Selector Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-        {defects.map((def, idx) => (
-          <div
-            key={idx}
-            onClick={() => setSelectedDefect(idx)}
-            className={`p-4 rounded-xl cursor-pointer transition-all duration-300 ${
-              selectedDefect === idx
-                ? 'pcb-glass-active border-[#00E676] box-glow-green'
-                : 'pcb-glass border-[#00E676]/20 hover:border-[#00E676]/40'
-            }`}
-          >
-            <div className="flex items-center justify-between mb-2">
-              <AlertTriangle className="w-4 h-4 text-amber-400" />
-              <span className="text-[10px] font-mono font-bold text-red-400 px-1.5 py-0.5 rounded bg-red-950/60 border border-red-800">
-                {def.severity}
-              </span>
+        {/* Defect Selector Grid */}
+        <div className="grid grid-cols-2 gap-2.5 mb-4">
+          {defects.map((def, idx) => (
+            <div
+              key={idx}
+              onClick={() => setSelectedDefect(idx)}
+              className={`p-3 rounded-xl cursor-pointer transition-all duration-300 ${
+                selectedDefect === idx
+                  ? 'pcb-glass-active border-[#00E676] box-glow-green'
+                  : 'pcb-glass border-[#00E676]/20 hover:border-[#00E676]/40'
+              }`}
+            >
+              <div className="flex items-center justify-between mb-1">
+                <AlertTriangle className="w-3.5 h-3.5 text-amber-400" />
+                <span className="text-[9px] font-mono font-bold text-red-400 px-1 py-0.5 rounded bg-red-950/60 border border-red-800">
+                  {def.severity}
+                </span>
+              </div>
+              <h4 className="font-mono font-bold text-xs text-white mb-0.5">{def.name}</h4>
+              <p className="text-[10px] font-mono text-[#00E676] truncate">{def.type}</p>
             </div>
-            <h4 className="font-mono font-bold text-sm text-white mb-1">{def.name}</h4>
-            <p className="text-[11px] font-mono text-[#00E676]">{def.type}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* Selected Defect Analysis Card */}
-      <div className="max-w-4xl pcb-glass p-6 rounded-2xl border border-[#00E676]/30 shadow-2xl">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/40 flex items-center justify-center">
-            <Wrench className="w-5 h-5 text-amber-400" />
-          </div>
-          <div>
-            <h3 className="font-mono font-extrabold text-lg text-white">
-              ROOT CAUSE ANALYSIS: {defects[selectedDefect].name}
-            </h3>
-            <p className="text-xs font-mono text-[#00E676]">{defects[selectedDefect].type}</p>
-          </div>
+          ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="p-4 rounded-xl bg-[#050b0d] border border-red-500/30">
-            <div className="text-xs font-mono font-bold text-red-400 uppercase mb-1">PHYSICAL ROOT CAUSE</div>
-            <p className="text-xs text-[#B7C2C5] leading-relaxed">{defects[selectedDefect].cause}</p>
+        {/* Selected Defect Analysis Card */}
+        <div className="pcb-glass p-4 rounded-xl border border-[#00E676]/30 shadow-xl">
+          <div className="flex items-center gap-2 mb-3">
+            <Wrench className="w-4 h-4 text-amber-400" />
+            <h3 className="font-mono font-bold text-sm text-white">
+              ANALYSIS: {defects[selectedDefect].name}
+            </h3>
           </div>
 
-          <div className="p-4 rounded-xl bg-[#050b0d] border border-[#00E676]/30">
-            <div className="text-xs font-mono font-bold text-[#00E676] uppercase mb-1">PREVENTION & DFM REMEDIATION</div>
-            <p className="text-xs text-[#B7C2C5] leading-relaxed">{defects[selectedDefect].solution}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+            <div className="p-2.5 rounded-lg bg-[#050b0d] border border-red-500/30">
+              <div className="text-[10px] font-mono font-bold text-red-400 uppercase mb-0.5">ROOT CAUSE</div>
+              <p className="text-[11px] text-[#B7C2C5] leading-normal">{defects[selectedDefect].cause}</p>
+            </div>
+
+            <div className="p-2.5 rounded-lg bg-[#050b0d] border border-[#00E676]/30">
+              <div className="text-[10px] font-mono font-bold text-[#00E676] uppercase mb-0.5">REMEDIATION</div>
+              <p className="text-[11px] text-[#B7C2C5] leading-normal">{defects[selectedDefect].solution}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Right Column: Image Viewer */}
+      <div className="flex-1 w-full h-[50vh] lg:h-[70vh] relative z-10 flex items-center justify-center p-4">
+        <div className="relative w-full max-w-xl h-full rounded-2xl overflow-hidden border border-[#00E676]/40 pcb-glass shadow-2xl group transition-all duration-500 hover:border-[#00E676]">
+          <img
+            src="/images/slide11_defects.png"
+            alt="SMT Solder Defect Analysis"
+            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050B0D] via-transparent to-transparent opacity-80" />
+          
+          <div className="absolute top-4 left-4 pcb-glass px-3 py-1.5 rounded-lg border border-[#00E676]/30 text-[10px] font-mono text-[#00E676] flex items-center gap-2">
+            <ImageIcon className="w-3.5 h-3.5" />
+            <span>IMAGE EXHIBIT 11: COMMON SMT DEFECT DIAGNOSTICS</span>
+          </div>
+
+          <div className="absolute bottom-4 left-4 right-4 pcb-glass p-3 rounded-xl border border-[#00E676]/30 backdrop-blur-md">
+            <div className="text-xs font-mono font-bold text-white mb-1">OPTICAL DEFECT INSPECTION</div>
+            <div className="text-[11px] font-mono text-[#00E676]">Solder Bridging, Tombstoned Resistor & Insufficient Solder Joint</div>
           </div>
         </div>
       </div>
     </div>
   );
 };
+
