@@ -1,6 +1,7 @@
 const PptxGenJS = require('pptxgenjs');
 const path = require('path');
 const fs = require('fs');
+const JSZip = require('jszip');
 
 const pptx = new PptxGenJS();
 
@@ -24,10 +25,11 @@ const slidesData = [
     title: "PCB ASSEMBLY",
     subtitle: "PROCESSES & STAGES",
     stageTag: "AUTOMATED PRECISION MANUFACTURING GUIDE",
-    description: "A comprehensive digital presentation exploring modern surface-mount technology (SMT), thermodynamics, through-hole wave soldering, and automated optical/X-ray quality control.",
+    description: "A comprehensive, modern digital presentation exploring surface-mount technology (SMT), thermodynamics, through-hole wave soldering, and automated optical/X-ray quality control.",
     credits: "Presenter: M. Hima Bindu | Roll No: 24F65A0410 | Class: Final Year ECE-1",
     image: path.join(baseDir, "slide01_hero.png"),
-    isTitleSlide: true
+    isTitleSlide: true,
+    transitionXml: '<p:transition spd="med" advClick="1"><p:fade/></p:transition>'
   },
   {
     slideNumber: "02",
@@ -45,7 +47,8 @@ const slidesData = [
       { label: "THT Tech", value: "Through-Hole Technology" },
       { label: "Mixed Tech", value: "Hybrid High-Density Assembly" }
     ],
-    image: path.join(baseDir, "slide02_smt_tht.png")
+    image: path.join(baseDir, "slide02_smt_tht.png"),
+    transitionXml: '<p:transition spd="med" advClick="1"><p:push dir="l"/></p:transition>'
   },
   {
     slideNumber: "03",
@@ -64,7 +67,8 @@ const slidesData = [
       { label: "Control Systems", value: "Closed-Loop Telemetry" },
       { label: "Line Speed", value: "Up to 50,000 CPH" }
     ],
-    image: path.join(baseDir, "slide01_hero.png")
+    image: path.join(baseDir, "slide01_hero.png"),
+    transitionXml: '<p:transition spd="med" advClick="1"><p:push dir="l"/></p:transition>'
   },
   {
     slideNumber: "04",
@@ -82,7 +86,8 @@ const slidesData = [
       { label: "Deposit Height", value: "125 µm ± 15 µm" },
       { label: "SPI Laser Scan", value: "3D Volumetric Inspection" }
     ],
-    image: path.join(baseDir, "slide04_solder_printing.png")
+    image: path.join(baseDir, "slide04_solder_printing.png"),
+    transitionXml: '<p:transition spd="med" advClick="1"><p:push dir="l"/></p:transition>'
   },
   {
     slideNumber: "05",
@@ -100,7 +105,8 @@ const slidesData = [
       { label: "Accuracy", value: "±25 µm @ 3 Sigma" },
       { label: "Min Package", value: "01005 (0.4mm x 0.2mm)" }
     ],
-    image: path.join(baseDir, "slide05_pick_and_place.png")
+    image: path.join(baseDir, "slide05_pick_and_place.png"),
+    transitionXml: '<p:transition spd="med" advClick="1"><p:push dir="l"/></p:transition>'
   },
   {
     slideNumber: "06",
@@ -119,7 +125,8 @@ const slidesData = [
       { label: "Time Above Liquidus", value: "45 - 75 Seconds" },
       { label: "Thermal Zones", value: "10 Forced Convection Zones" }
     ],
-    image: path.join(baseDir, "slide06_reflow_oven.png")
+    image: path.join(baseDir, "slide06_reflow_oven.png"),
+    transitionXml: '<p:transition spd="med" advClick="1"><p:push dir="l"/></p:transition>'
   },
   {
     slideNumber: "07",
@@ -138,7 +145,8 @@ const slidesData = [
       { label: "Incline", value: "5° - 7° Incline" },
       { label: "Barrel Fill", value: "> 75% IPC Class 3" }
     ],
-    image: path.join(baseDir, "slide07_wave_soldering.png")
+    image: path.join(baseDir, "slide07_wave_soldering.png"),
+    transitionXml: '<p:transition spd="med" advClick="1"><p:push dir="l"/></p:transition>'
   },
   {
     slideNumber: "08",
@@ -156,7 +164,8 @@ const slidesData = [
       { label: "Resolution", value: "10 - 15 µm / pixel" },
       { label: "Yield Target", value: "< 10 DPMO Defect Goal" }
     ],
-    image: path.join(baseDir, "slide08_aoi_inspection.png")
+    image: path.join(baseDir, "slide08_aoi_inspection.png"),
+    transitionXml: '<p:transition spd="med" advClick="1"><p:push dir="l"/></p:transition>'
   },
   {
     slideNumber: "09",
@@ -174,7 +183,8 @@ const slidesData = [
       { label: "Max BGA Void", value: "< 15% Area Limit" },
       { label: "FCT Coverage", value: "100% Verification" }
     ],
-    image: path.join(baseDir, "slide09_axi_xray.png")
+    image: path.join(baseDir, "slide09_axi_xray.png"),
+    transitionXml: '<p:transition spd="med" advClick="1"><p:push dir="l"/></p:transition>'
   },
   {
     slideNumber: "10",
@@ -192,7 +202,8 @@ const slidesData = [
       { label: "Medical Grade", value: "ISO 13485 & IPC Class 3" },
       { label: "Automotive EV", value: "AEC-Q100 ASIL-D" }
     ],
-    image: path.join(baseDir, "slide10_applications.png")
+    image: path.join(baseDir, "slide10_applications.png"),
+    transitionXml: '<p:transition spd="med" advClick="1"><p:push dir="l"/></p:transition>'
   },
   {
     slideNumber: "11",
@@ -211,7 +222,8 @@ const slidesData = [
       { label: "Yield Target", value: "> 99.5% First-Pass Yield" },
       { label: "Closed-Loop", value: "SPI to Stencil Feedback" }
     ],
-    image: path.join(baseDir, "slide11_defects.png")
+    image: path.join(baseDir, "slide11_defects.png"),
+    transitionXml: '<p:transition spd="med" advClick="1"><p:push dir="l"/></p:transition>'
   },
   {
     slideNumber: "12",
@@ -229,7 +241,8 @@ const slidesData = [
       { label: "Environmental", value: "EU RoHS 3 Compliant" },
       { label: "ESD Protection", value: "< 100V HBM Model" }
     ],
-    image: path.join(baseDir, "slide12_standards.png")
+    image: path.join(baseDir, "slide12_standards.png"),
+    transitionXml: '<p:transition spd="med" advClick="1"><p:push dir="l"/></p:transition>'
   },
   {
     slideNumber: "13",
@@ -247,7 +260,8 @@ const slidesData = [
       { label: "AI Integration", value: "Autonomous Closed-Loop Tuning" },
       { label: "Substrate Tech", value: "Embedded Active Components" }
     ],
-    image: path.join(baseDir, "slide13_future_trends.png")
+    image: path.join(baseDir, "slide13_future_trends.png"),
+    transitionXml: '<p:transition spd="med" advClick="1"><p:push dir="l"/></p:transition>'
   },
   {
     slideNumber: "14",
@@ -257,20 +271,32 @@ const slidesData = [
     description: "Thank you for exploring the automated precision manufacturing guide to modern Printed Circuit Board Assembly.",
     credits: "Presenter: M. Hima Bindu | Roll No: 24F65A0410 | Class: Final Year ECE-1",
     image: path.join(baseDir, "ending_slide.png"),
-    isEndingSlide: true
+    isEndingSlide: true,
+    transitionXml: '<p:transition spd="med" advClick="1"><p:fade/></p:transition>'
   }
 ];
 
-slidesData.forEach((s) => {
+const totalSlidesCount = slidesData.length;
+
+slidesData.forEach((s, idx) => {
   const slide = pptx.addSlide();
   slide.background = { color: DARK_BG };
 
-  // Top Header Tag
-  slide.addText(`SLIDE ${s.slideNumber} • ${s.stageTag}`, {
+  // Top Neon Progress Bar (Trending Slide Design)
+  const progressRatio = (idx + 1) / totalSlidesCount;
+  slide.addShape(pptx.shapes.RECTANGLE, {
+    x: 0,
+    y: 0,
+    w: 13.33 * progressRatio,
+    h: 0.06,
+    fill: { color: ACCENT_GREEN },
+    line: { color: ACCENT_GREEN, width: 0 }
+  });
 
-
+  // Top Header Tag & Slide Counter
+  slide.addText(`SLIDE ${s.slideNumber} / ${totalSlidesCount} • ${s.stageTag}`, {
     x: 0.5,
-    y: 0.4,
+    y: 0.35,
     w: 6.0,
     h: 0.3,
     fontSize: 10,
@@ -282,7 +308,7 @@ slidesData.forEach((s) => {
   // Main Title
   slide.addText(s.title, {
     x: 0.5,
-    y: 0.7,
+    y: 0.65,
     w: 6.2,
     h: 0.6,
     fontSize: 24,
@@ -294,7 +320,7 @@ slidesData.forEach((s) => {
   // Subtitle
   slide.addText(s.subtitle, {
     x: 0.5,
-    y: 1.25,
+    y: 1.2,
     w: 6.2,
     h: 0.4,
     fontSize: 14,
@@ -306,7 +332,7 @@ slidesData.forEach((s) => {
   // Description
   slide.addText(s.description, {
     x: 0.5,
-    y: 1.7,
+    y: 1.65,
     w: 6.0,
     h: 0.8,
     fontSize: 11,
@@ -319,16 +345,16 @@ slidesData.forEach((s) => {
   if (s.credits) {
     slide.addShape(pptx.shapes.ROUNDED_RECTANGLE, {
       x: 0.5,
-      y: 2.7,
+      y: 2.65,
       w: 6.0,
-      h: 1.2,
+      h: 1.3,
       fill: { color: CARD_BG },
-      line: { color: BORDER_COLOR, width: 1 }
+      line: { color: BORDER_COLOR, width: 1.5 }
     });
 
     slide.addText("STUDENT CREDITS", {
       x: 0.7,
-      y: 2.8,
+      y: 2.75,
       w: 5.6,
       h: 0.3,
       fontSize: 10,
@@ -339,7 +365,7 @@ slidesData.forEach((s) => {
 
     slide.addText("M. HIMA BINDU", {
       x: 0.7,
-      y: 3.1,
+      y: 3.05,
       w: 5.6,
       h: 0.4,
       fontSize: 18,
@@ -350,7 +376,7 @@ slidesData.forEach((s) => {
 
     slide.addText("ID: 24F65A0410  |  Final Year | ECE-1", {
       x: 0.7,
-      y: 3.5,
+      y: 3.45,
       w: 5.6,
       h: 0.3,
       fontSize: 11,
@@ -361,10 +387,10 @@ slidesData.forEach((s) => {
 
   // Key Points List
   if (s.keyPoints && s.keyPoints.length > 0) {
-    let keyPointsText = s.keyPoints.map((kp, idx) => `•  ${kp}`).join('\n\n');
+    let keyPointsText = s.keyPoints.map((kp) => `•  ${kp}`).join('\n\n');
     slide.addText(keyPointsText, {
       x: 0.5,
-      y: 2.6,
+      y: 2.55,
       w: 6.0,
       h: 2.4,
       fontSize: 10,
@@ -376,11 +402,11 @@ slidesData.forEach((s) => {
 
   // Specs Cards at bottom left
   if (s.specs && s.specs.length > 0) {
-    s.specs.forEach((sp, idx) => {
-      const cardX = 0.5 + idx * 2.0;
+    s.specs.forEach((sp, specIdx) => {
+      const cardX = 0.5 + specIdx * 2.0;
       slide.addShape(pptx.shapes.ROUNDED_RECTANGLE, {
         x: cardX,
-        y: 5.2,
+        y: 5.15,
         w: 1.9,
         h: 0.9,
         fill: { color: CARD_BG },
@@ -389,7 +415,7 @@ slidesData.forEach((s) => {
 
       slide.addText(sp.label.toUpperCase(), {
         x: cardX + 0.1,
-        y: 5.3,
+        y: 5.25,
         w: 1.7,
         h: 0.2,
         fontSize: 8,
@@ -400,7 +426,7 @@ slidesData.forEach((s) => {
 
       slide.addText(sp.value, {
         x: cardX + 0.1,
-        y: 5.55,
+        y: 5.5,
         w: 1.7,
         h: 0.4,
         fontSize: 9,
@@ -416,17 +442,17 @@ slidesData.forEach((s) => {
     slide.addImage({
       path: s.image,
       x: 6.8,
-      y: 0.7,
+      y: 0.65,
       w: 5.9,
       h: 5.5
     });
 
     slide.addShape(pptx.shapes.RECTANGLE, {
       x: 6.8,
-      y: 0.7,
+      y: 0.65,
       w: 5.9,
       h: 5.5,
-      line: { color: ACCENT_GREEN, width: 1 },
+      line: { color: ACCENT_GREEN, width: 1.5 },
       fill: { color: '000000', transparency: 100 }
     });
   }
@@ -444,8 +470,28 @@ slidesData.forEach((s) => {
 });
 
 const outputPath = path.join(__dirname, '..', '..', 'PCB_Assembly_Processes_and_Stages.pptx');
-pptx.writeFile({ fileName: outputPath }).then((filename) => {
-  console.log(`PPTX created successfully at: ${filename}`);
+
+// Generate stream buffer and inject PowerPoint OpenXML transitions using JSZip
+pptx.write('nodebuffer').then(async (buffer) => {
+  const zip = await JSZip.loadAsync(buffer);
+
+  // Iterate over all slides and inject transition XML right before </p:sld>
+  for (let i = 0; i < slidesData.length; i++) {
+    const slideXmlPath = `ppt/slides/slide${i + 1}.xml`;
+    if (zip.files[slideXmlPath]) {
+      let slideXml = await zip.files[slideXmlPath].async('string');
+      const transXml = slidesData[i].transitionXml || '<p:transition spd="med" advClick="1"><p:fade/></p:transition>';
+      
+      if (!slideXml.includes('<p:transition')) {
+        slideXml = slideXml.replace('</p:sld>', `${transXml}</p:sld>`);
+        zip.file(slideXmlPath, slideXml);
+      }
+    }
+  }
+
+  const finalBuffer = await zip.generateAsync({ type: 'nodebuffer' });
+  fs.writeFileSync(outputPath, finalBuffer);
+  console.log(`Animated PPTX successfully created at: ${outputPath}`);
 }).catch((err) => {
-  console.error("Error creating PPTX:", err);
+  console.error("Error creating animated PPTX:", err);
 });
