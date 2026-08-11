@@ -87,24 +87,9 @@ export const BackgroundCanvas: React.FC<BackgroundCanvasProps> = ({ theme = 'dar
         <AmbientTraces theme={theme} />
       </Canvas>
 
-      {/* Transparent PCB Circuit Pattern Overlay (Non-Disruptive background) */}
-      <div className="absolute inset-0 opacity-[0.07] pointer-events-none flex items-center justify-center overflow-hidden">
-        <svg className="w-full h-full text-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" fill="none" stroke={strokeColor}>
-          <path d="M100 100 h200 l100 100 v300 l-100 100 h-200" strokeWidth="2" strokeDasharray="6,6" />
-          <path d="M800 100 h-200 l-100 100 v300 l100 100 h200" strokeWidth="2" strokeDasharray="6,6" />
-          <circle cx="300" cy="100" r="8" fill={strokeColor} />
-          <circle cx="700" cy="100" r="8" fill={strokeColor} />
-          <circle cx="400" cy="200" r="6" fill={strokeColor} />
-          <circle cx="600" cy="200" r="6" fill={strokeColor} />
-          <path d="M500 50 v900 M50 500 h900" strokeWidth="1.5" strokeOpacity="0.4" />
-          <rect x="350" y="350" width="300" height="300" rx="20" strokeWidth="2" />
-          <circle cx="500" cy="500" r="80" strokeWidth="1.5" strokeDasharray="4,4" />
-        </svg>
-      </div>
-
       {/* Grid Pattern Overlay */}
       <div
-        className="absolute inset-0 opacity-[0.04] pointer-events-none"
+        className="absolute inset-0 opacity-[0.05] pointer-events-none"
         style={{
           backgroundImage: `radial-gradient(${strokeColor} 1px, transparent 1px)`,
           backgroundSize: '24px 24px',
@@ -113,4 +98,5 @@ export const BackgroundCanvas: React.FC<BackgroundCanvasProps> = ({ theme = 'dar
     </div>
   );
 };
+
 

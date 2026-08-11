@@ -265,18 +265,9 @@ slidesData.forEach((s) => {
   const slide = pptx.addSlide();
   slide.background = { color: DARK_BG };
 
-  // Subtle Translucent Background Card behind Text Area (non-disruptive)
-  slide.addShape(pptx.shapes.ROUNDED_RECTANGLE, {
-    x: 0.3,
-    y: 0.3,
-    w: 6.3,
-    h: 6.3,
-    fill: { color: '091316', transparency: 20 },
-    line: { color: ACCENT_GREEN, width: 1, transparency: 70 }
-  });
-
   // Top Header Tag
   slide.addText(`SLIDE ${s.slideNumber} • ${s.stageTag}`, {
+
 
     x: 0.5,
     y: 0.4,
